@@ -41,10 +41,12 @@ class NewRelicConfiguration {
     fun newRelicMeterRegistry(config: NewRelicRegistryConfig): NewRelicRegistry {
         val newRelicRegistry = NewRelicRegistry
                 .builder(config)
-                .commonAttributes(Attributes().put("host", InetAddress.getLocalHost().hostName))
-                .build()
+                .commonAttributes(
+                        Attributes()
+                                .put("host", InetAddress.getLocalHost().hostName)
+                                .put("app.name", "sampleApplication")
+                ).build()
 
-        newRelicRegistry.config().meterFilter(MeterFilter.ignoreTags("plz_ignore_me"))
         newRelicRegistry.config().meterFilter(MeterFilter.denyNameStartsWith("jvm.threads"))
         newRelicRegistry.start(NamedThreadFactory("newrelic.micrometer.registry"))
 
