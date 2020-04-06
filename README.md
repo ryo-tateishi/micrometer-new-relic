@@ -7,5 +7,7 @@
 
 ### コマンド
 ```shell script
+$ export NEWRELIC_ACCOUNT_ID=xxxxxx
+$ export NEWRELIC_INSIGHT_API_KEY=xxxxxx
 $ ./tools/start.sh
 ```
