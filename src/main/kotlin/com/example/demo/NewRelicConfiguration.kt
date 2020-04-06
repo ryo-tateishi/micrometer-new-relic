@@ -21,7 +21,7 @@ class NewRelicConfiguration(properties: NewRelicProperties) : NewRelicProperties
     fun customizer(): MeterRegistryCustomizer<NewRelicMeterRegistry> {
         return MeterRegistryCustomizer<NewRelicMeterRegistry> {
             it.config()
-                    .commonTags("app", "sample-app")
+                    .commonTags("appName", "demo-sample")
                     .commonTags("environment", "local")
         }
     }
