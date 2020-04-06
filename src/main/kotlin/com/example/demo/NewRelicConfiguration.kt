@@ -28,7 +28,7 @@ class NewRelicConfiguration {
             }
 
             override fun apiKey(): String {
-                return System.getenv("INSIGHTS_INSERT_KEY")
+                return System.getenv("NEWRELIC_INSIGHT_API_KEY")
             }
 
             override fun serviceName(): String {
