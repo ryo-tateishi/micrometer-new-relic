@@ -1,28 +1,19 @@
 package com.example.demo
 
-import io.micrometer.newrelic.NewRelicMeterRegistry
+import io.micrometer.core.instrument.MeterRegistry
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer
-import org.springframework.boot.actuate.autoconfigure.metrics.export.newrelic.NewRelicProperties
-import org.springframework.boot.actuate.autoconfigure.metrics.export.newrelic.NewRelicPropertiesConfigAdapter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class NewRelicConfiguration(properties: NewRelicProperties) : NewRelicPropertiesConfigAdapter(properties) {
-    override fun apiKey(): String {
-        return System.getenv("NEWRELIC_INSIGHT_API_KEY")
-    }
-
-    override fun accountId(): String {
-        return System.getenv("NEWRELIC_ACCOUNT_ID")
-    }
-
+class NewRelicConfiguration {
     @Bean
-    fun customizer(): MeterRegistryCustomizer<NewRelicMeterRegistry> {
-        return MeterRegistryCustomizer<NewRelicMeterRegistry> {
-            it.config()
-                    .commonTags("appName", "demo-sample")
-                    .commonTags("environment", "local")
+    fun customizer(): MeterRegistryCustomizer<MeterRegistry> {
+        return MeterRegistryCustomizer<MeterRegistry> {
+            it.config().commonTags(
+                    "appName", "ioMicrometerApp",
+                    "environment", "local-for-ioMicrometer"
+            )
         }
     }
 }
